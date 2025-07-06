@@ -19,11 +19,11 @@
         },
         "addUserHandler": {
           "deploymentBucketName": "amplify-tddproject-dev-01733-deployment",
-          "s3Key": "amplify-builds/addUserHandler-7064386873524278434b-build.zip"
+          "s3Key": "amplify-builds/addUserHandler-42535a7732476c4f6337-build.zip"
         },
         "getUserHandler": {
           "deploymentBucketName": "amplify-tddproject-dev-01733-deployment",
-          "s3Key": "amplify-builds/getUserHandler-6b44306d52786f336b6f-build.zip"
+          "s3Key": "amplify-builds/getUserHandler-654a624f516c6c415349-build.zip"
         }
       },
       "storage": {

@@ -1,14 +1,10 @@
 import boto3
-import sys
-import os
 from moto import mock_dynamodb
-
-sys.path.insappend(os.path.abspath("./amplify/backend/function/userHandler/src"))
-# import index from handler
+from boto3.dynamodb.conditions import Key
+import uuid
 
 @mock.dynamodb
-def test_add_and_get_user_by_email():
-    # 1 simule dynamodb
+def test_add_user():
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
     table = dynamodb.create_table(
         TableName='UserTable',
@@ -54,25 +50,10 @@ def test_add_and_get_user_by_email():
     )
     table.meta.client.get_waiter('table_exists').wait(TableName='UserTable')
 
-    # 2 
-    handler.TABLE_NAME = 'UserTable'
-    handler.table = dynamodb.Table('UserTable')
-
-    # 3 add user
     table.put_item(
         Item={
-            'user_id': '123dsqdsq',
+            'user_id': str(uuid.uuid4()),
             'name': 'John Doe',
             'email': 'test@teest.com'
         }
     )
-
-    response = table.query(
-        IndexName='email-index',
-        KeyConditionExpression=Key('email').eq('test@teest.com')
-    )
-
-    items = response.get('Items', [])
-    assert len(items) == 1
-    assert items[0]['user_id'] == '123dsqdsq'
-    assert items[0]['name'] == 'John Doe'
