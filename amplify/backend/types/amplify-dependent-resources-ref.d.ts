@@ -1,5 +1,19 @@
 export type AmplifyDependentResourcesAttributes = {
   "function": {
+    "addUserHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "getUserHandler": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "userHandler": {
       "Arn": "string",
       "LambdaExecutionRole": "string",

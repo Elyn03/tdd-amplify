@@ -33,3 +33,13 @@ npm run build
 ```sh
 npm run test:unit
 ```
+
+
+Objectif : créer un projet Amplify avec une Labda qui enregistre un utilisateur dans DynamoBD, et écrire des tests unitaires mockés avec Moto pour valider la logique.
+
+On part sur un projet backend pur sans API REST exposée, juste :
+- Un code métier : add_user(), get_user()
+- Une table DynamoBD créée via Amplify
+- Un fonction Lambda qui s'en sert
+- Des test locaux simulés avec Moto
+- Optionnellement : tu les intègres dans CI/CD Amplify

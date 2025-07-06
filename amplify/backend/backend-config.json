@@ -1,12 +1,65 @@
 {
   "function": {
+    "addUserHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "getUserHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "userHandler": {
       "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "UserTable"
+        }
+      ],
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "parameters": {
+    "AMPLIFY_function_addUserHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addUserHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_addUserHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "addUserHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_getUserHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "getUserHandler"
+        }
+      ]
+    },
     "AMPLIFY_function_userHandler_deploymentBucketName": {
       "usedBy": [
         {

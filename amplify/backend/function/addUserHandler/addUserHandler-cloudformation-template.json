@@ -15,18 +15,6 @@
     },
     "s3Key": {
       "Type": "String"
-    },
-    "storageUserTableName": {
-      "Type": "String",
-      "Default": "storageUserTableName"
-    },
-    "storageUserTableArn": {
-      "Type": "String",
-      "Default": "storageUserTableArn"
-    },
-    "storageUserTableStreamArn": {
-      "Type": "String",
-      "Default": "storageUserTableStreamArn"
     }
   },
   "Conditions": {
@@ -59,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "userHandler",
+            "addUserHandler",
             {
               "Fn::Join": [
                 "",
                 [
-                  "userHandler",
+                  "addUserHandler",
                   "-",
                   {
                     "Ref": "env"
@@ -81,15 +69,6 @@
             },
             "REGION": {
               "Ref": "AWS::Region"
-            },
-            "STORAGE_USERTABLE_NAME": {
-              "Ref": "storageUserTableName"
-            },
-            "STORAGE_USERTABLE_ARN": {
-              "Ref": "storageUserTableArn"
-            },
-            "STORAGE_USERTABLE_STREAMARN": {
-              "Ref": "storageUserTableStreamArn"
             }
           }
         },
@@ -110,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "tddprojectLambdaRole3d93db1b",
+            "tddprojectLambdaRole3f2bb8f2",
             {
               "Fn::Join": [
                 "",
                 [
-                  "tddprojectLambdaRole3d93db1b",
+                  "tddprojectLambdaRole3f2bb8f2",
                   "-",
                   {
                     "Ref": "env"
@@ -181,57 +160,6 @@
                   }
                 ]
               }
-            }
-          ]
-        }
-      }
-    },
-    "AmplifyResourcesPolicy": {
-      "DependsOn": [
-        "LambdaExecutionRole"
-      ],
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "amplify-lambda-execution-policy",
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ],
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Effect": "Allow",
-              "Action": [
-                "dynamodb:Put*",
-                "dynamodb:Create*",
-                "dynamodb:BatchWriteItem",
-                "dynamodb:PartiQLInsert",
-                "dynamodb:Get*",
-                "dynamodb:BatchGetItem",
-                "dynamodb:List*",
-                "dynamodb:Describe*",
-                "dynamodb:Scan",
-                "dynamodb:Query",
-                "dynamodb:PartiQLSelect"
-              ],
-              "Resource": [
-                {
-                  "Ref": "storageUserTableArn"
-                },
-                {
-                  "Fn::Join": [
-                    "/",
-                    [
-                      {
-                        "Ref": "storageUserTableArn"
-                      },
-                      "index/*"
-                    ]
-                  ]
-                }
-              ]
             }
           ]
         }
